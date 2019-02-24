@@ -2,19 +2,14 @@ const expect = require('chai').expect;
 const got   = require('got');
 
 describe('checkbox', function() {
-  describe('/api/study/create', function() {
-    it('should send an error for invalid invite code', async () => {
+  describe('/api/study/listing', function() {
+    it('should return empty studies array', async () => {
 
-      const response = await got.post('http://localhost:3001/api/study/create', {
-        body: {
-          invitecode: "NOT-RESEARCH",
-          studyKind: "survey"
-        },
-        json:true,
+      const response = await got('http://localhost:3003/api/study/listing', {
         timeout: 500
-      })
+      });
           
-      expect(response.body).to.include("error':'Invalid invitecode'");
+      expect(response.body).to.include('"studies": []');
     });
   });
 });
