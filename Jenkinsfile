@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'cd ~/checkbox.io/server-side/site'
+                sh 'cd server-side/site'
                 sh 'npm install'
                 sh 'npm start && npm test && npm stop'
             }
