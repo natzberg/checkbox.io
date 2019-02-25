@@ -3,7 +3,7 @@ const got   = require('got');
 
 describe('checkbox', function() {
   describe('/api/study/listing', function() {
-    it('should return empty studies array', async () => {
+    it('should return empty studies array and 200 status code', async () => {
 
       const response = await got('http://localhost:3003/api/study/listing', {
         timeout: 500
