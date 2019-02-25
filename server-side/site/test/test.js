@@ -9,7 +9,7 @@ describe('checkbox', function() {
         timeout: 500
       });
       
-      expect(response.statusCode).to.be(200);
+      expect(response.statusCode).to.equal(200);
       expect(response.body).to.include('"studies": []');
     });
   });
