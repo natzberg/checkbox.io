@@ -13,9 +13,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'cd server-side/site'
-                sh 'npm install'
-                sh 'npm start && npm test && npm stop'
+                sh 'cd server-side/site && npm install'
+                sh 'cd server-side/site && npm start && npm test && npm stop'
             }
         }
     }
