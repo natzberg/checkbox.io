@@ -5,7 +5,7 @@ describe('checkbox', function() {
   describe('/api/study/listing', function() {
     it('should return empty studies array and 200 status code', async () => {
 
-      const response = await got(`http://localhost:${APP_PORT}/api/study/listing`, {
+      const response = await got(`http://localhost:${process.env.APP_PORT}/api/study/listing`, {
         timeout: 500
       });
       
