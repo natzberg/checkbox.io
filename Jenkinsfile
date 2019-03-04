@@ -11,6 +11,13 @@ pipeline {
         MONGO_PORT = '27017'
     }
     stages {
+        stage('Setup') {
+            steps {
+                echo 'Cloning repo.'
+                git url: 'https://github.com/meboehle/checkbox.io'
+                sh 'make all'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'cd ~/checkbox.io/server-side/site'
