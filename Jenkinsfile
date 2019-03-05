@@ -14,6 +14,15 @@ pipeline {
         stage('Setup') {
             steps {
                 git url: 'https://github.com/natzberg/checkbox.io'
+                
+                checkout([$class: 'GitSCM', 
+                branches: [[name: '*/master']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [
+                    [$class: 'SparseCheckoutPaths',  sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'folderName/']]]
+                            ],
+                submoduleCfg: [],
+                url: 'git@github.com/natzberg/checkbox.io.git']]])
             }
         }
         stage('Build') {
