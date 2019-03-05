@@ -12,7 +12,9 @@ pipeline {
     }
     stages {
         stage('Setup') {
-          git 'https://github.com/natzberg/checkbox.io.git'
+            steps {
+                git 'https://github.com/natzberg/checkbox.io.git'
+            }
         }
         stage('Build') {
             steps {
