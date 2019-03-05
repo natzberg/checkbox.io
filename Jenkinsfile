@@ -11,9 +11,11 @@ pipeline {
         MONGO_PORT = '27017'
     }
     stages {
+        stage('Setup') {
+          git 'https://github.com/natzberg/checkbox.io.git'
+        }
         stage('Build') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'subdirectory1']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/natzberg/checkbox.io.git']]])
                 sh 'cd ~/checkbox.io/server-side/site'
                 sh 'npm install'
                 sh 'npm start && npm test && npm stop'
