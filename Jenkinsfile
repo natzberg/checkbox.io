@@ -10,22 +10,10 @@ pipeline {
         APP_PORT = '3003'
         MONGO_PORT = '27017'
     }
+    node {
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'subdirectory1']], submoduleCfg: [], userRemoteConfigs: [[url: 'github.com/natzberg/checkbox.io.git']]])
+    }
     stages {
-        stage('Setup') {
-            steps {
-                git url: 'https://github.com/natzberg/checkbox.io'
-                
-                checkout([$class: 'GitSCM', 
-                    branches: [[name: '*/master']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [
-                        [$class: 'SparseCheckoutPaths',  sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'folderName/']]
-                                ],
-                    submoduleCfg: [],
-                    userRemoteConfigs: [
-                    url: 'git@github.com/natzberg/checkbox.io.git']]])
-            }
-        }
         stage('Build') {
             steps {
                 sh 'cd ~/checkbox.io/server-side/site'
