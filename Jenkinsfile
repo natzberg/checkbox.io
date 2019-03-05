@@ -13,14 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', 
-                    branches: [[name: '*/master']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [
-                        [$class: 'SparseCheckoutPaths',  sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/var/lib/jenkins/job/checkbox.io']]]
-                                ],
-                    submoduleCfg: [], 
-                    userRemoteConfigs: [[url: 'https://github.com/natzberg/checkbox.io.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/natzberg/checkbox.io.git']]])
             }
         }
         stage('Build') {
