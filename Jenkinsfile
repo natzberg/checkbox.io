@@ -22,7 +22,7 @@ pipeline {
                     [$class: 'SparseCheckoutPaths',  sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'folderName/']]
                             ],
                 submoduleCfg: [],
-                url: 'git@github.com/natzberg/checkbox.io.git']]])
+                url: 'git@github.com/natzberg/checkbox.io.git']])
             }
         }
         stage('Build') {
