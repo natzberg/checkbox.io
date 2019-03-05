@@ -11,9 +11,10 @@ pipeline {
         MONGO_PORT = '27017'
     }
     stages {
-        stage('Setup') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/natzberg/checkbox.io.git'
+                git branch: 'master',
+                url: 'https://github.com/natzberg/checkbox.io.git'
             }
         }
         stage('Build') {
