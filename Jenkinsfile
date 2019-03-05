@@ -19,7 +19,7 @@ pipeline {
                 branches: [[name: '*/master']],
                 doGenerateSubmoduleConfigurations: false,
                 extensions: [
-                    [$class: 'SparseCheckoutPaths',  sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'folderName/']]]
+                    [$class: 'SparseCheckoutPaths',  sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'folderName/']]
                             ],
                 submoduleCfg: [],
                 url: 'git@github.com/natzberg/checkbox.io.git']]])
