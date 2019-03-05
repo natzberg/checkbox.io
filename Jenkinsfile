@@ -20,7 +20,7 @@ pipeline {
                         [$class: 'SparseCheckoutPaths',  sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/var/lib/jenkins/job/checkbox.io']]]
                                 ],
                     submoduleCfg: [], 
-                    userRemoteConfigs: [[url: 'git@github.com/natzberg/checkbox.io.git']]])
+                    userRemoteConfigs: [[url: 'https://github.com/natzberg/checkbox.io.git']]])
             }
         }
         stage('Build') {
