@@ -17,5 +17,11 @@ pipeline {
                 sh 'cd server-side/site && npm start && npm test && npm stop'
             }
         }
+
+        stage('Analysis') {
+            steps {
+                sh 'cd server-side/site && node analysis.js'
+            }
+        }
     }
 }
