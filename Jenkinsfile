@@ -14,7 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'cd server-side/site && npm install'
-                sh 'cd server-side/site && npm test'
+                sh 'cd server-side/site && npm start && npm test && npm stop'
             }
         }
     }
