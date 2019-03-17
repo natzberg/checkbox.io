@@ -147,7 +147,12 @@ function complexity(filePath)
 		{
 			var builder = new FunctionBuilder();
 
-			builder.FunctionName = node.expression.left.property.name;
+			if (node.expression.left.name != undefined) {
+				builder.FunctionName = node.expression.left.name;
+			} else if (node.expression.left.property != undefined) {
+				builder.FunctionName = node.expression.left.property.name;
+			}
+			
 			builder.StartLine    = node.loc.start.line;
 			node = node.expression.right;
 			builder.ParameterCount = node.params.length;
