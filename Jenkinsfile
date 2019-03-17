@@ -35,8 +35,10 @@ pipeline {
                         script: 'cat ~/analysis_results.txt',
                         returnStdout: true
                     ).trim()
-                    if(RESULTS.length > 0)
+                    if(RESULTS.length > 0) {
+                        echo "Hello from failed build"
                         currentBuild.result = 'FAILURE'
+                    }
                 }
             }
         }
