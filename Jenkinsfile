@@ -32,7 +32,7 @@ pipeline {
                 
                 script {
                     def RESULTS = sh(
-                        script: 'cd server-side/site && node analysis.js ./routes/admin.js',
+                        script: 'cd server-side/site && node analysis.js marqdown.js',
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
