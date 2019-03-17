@@ -128,7 +128,6 @@ function complexity(filePath)
 					builder.SimpleCyclomaticComplexity++;
 
 					traverseWithParents(child, function(child2) {
-						console.log(child2);
 						if( child2.type == 'LogicalExpression' )
 							builder.MaxConditions++;
 					});
