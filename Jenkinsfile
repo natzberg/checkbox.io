@@ -30,7 +30,7 @@ pipeline {
                 sh 'cd server-side/site && node analysis.js ./routes/upload.js | grep --lineBuffered "LongMethod: true" >> ~/analysis_results.txt'
                 sh 'cd server-side/site && node analysis.js marqdown.js | grep --lineBuffered "LongMethod: true" >> ~/analysis_results.txt'
                 
-                RESULTS = sh(
+                def RESULTS = sh(
                     script: 'cat ~/analysis_results.txt',
                     returnStdout: true
                 ).trim()
