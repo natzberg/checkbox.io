@@ -1,5 +1,5 @@
 var esprima = require("esprima");
-var options = {tokens:true, tolerant: true, loc: true, range: true };
+var options = {tokens: true, tolerant: true, loc: true, range: true };
 var fs = require("fs");
 
 function main()
@@ -10,8 +10,10 @@ function main()
 	{
 		args = ["analysis.js"];
 	}
+
+	console.log(args);
 	var filePath = args[0];
-	
+
 	complexity(filePath);
 
 	// Report
@@ -98,7 +100,6 @@ function traverseWithParents(object, visitor)
     }
 }
 
-
 function complexity(filePath)
 {
 	var buf = fs.readFileSync(filePath, "utf8");
@@ -175,26 +176,6 @@ function complexity(filePath)
 	});
 
 }
-
-// Helper function for counting children of node.
-function childrenLength(node)
-{
-	var key, child;
-	var count = 0;
-	for (key in node) 
-	{
-		if (node.hasOwnProperty(key)) 
-		{
-			child = node[key];
-			if (typeof child === 'object' && child !== null && key != 'parent') 
-			{
-				count++;
-			}
-		}
-	}	
-	return count;
-}
-
 
 // Helper function for checking if a node is a "decision type node"
 function isDecision(node)
