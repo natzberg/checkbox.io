@@ -20,7 +20,7 @@ pipeline {
 
         stage('Analysis') {
             steps {
-                sh 'cd server-side/site && node analysis.js ./routes/admin.js | grep --line-buffered \"LongMethod: true\" >> ~/analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/admin.js | grep --line-buffered "LongMethod: true" > ~/analysis_results.txt'
                 sh 'cd server-side/site && node analysis.js ./routes/create.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
                 sh 'cd server-side/site && node analysis.js ./routes/csv.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
                 sh 'cd server-side/site && node analysis.js ./routes/designer.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
