@@ -151,16 +151,13 @@ function complexity(filePath)
 					if (child.type == 'IfStatement') {
 						var conditions = 1;
 						traverseWithParents(child, function(child2) {
-							if( child2.type == 'LogicalExpression' && (child2.parent.alternate && child2.parent.alternate.type != 'IfExpression' ))
-							{
-								console.log(child2.parent);
-								console.log("logical expression found");
+							if (child2.type == 'LogicalExpression') {
 								conditions++;
-								console.log('# conditions so far = ' + conditions);
 							}
+							if (conditions > builder.MaxConditions)
+								builder.MaxConditions = conditions;
 						});
-						if (conditions > builder.MaxConditions)
-							builder.MaxConditions = conditions;
+						
 					}
 				}
 			});
