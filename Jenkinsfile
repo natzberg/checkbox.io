@@ -30,12 +30,14 @@ pipeline {
                 sh 'cd server-side/site && node analysis.js ./routes/upload.js | grep --lineBuffered "LongMethod: true" >> ~/analysis_results.txt'
                 sh 'cd server-side/site && node analysis.js marqdown.js | grep --lineBuffered "LongMethod: true" >> ~/analysis_results.txt'
                 
-                def RESULTS = sh(
-                    script: 'cat ~/analysis_results.txt',
-                    returnStdout: true
-                ).trim()
-                if(RESULTS.length > 0)
-                    currentBuild.result = 'FAILURE'
+                script {
+                    def RESULTS = sh(
+                        script: 'cat ~/analysis_results.txt',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.length > 0)
+                        currentBuild.result = 'FAILURE'
+                }
             }
         }
     }
