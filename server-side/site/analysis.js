@@ -143,6 +143,34 @@ function complexity(filePath)
 			builders[builder.FunctionName] = builder;
 		}
 
+		if (node.type === 'ExpressionStatement' && node.expression.right && node.expression.right.type === 'FunctionExpression' ) 
+		{
+			var builder = new FunctionBuilder();
+
+			builder.FunctionName = node.expression.left.property.name;
+			builder.StartLine    = node.loc.start.line;
+			node = node.expression.right;
+			builder.ParameterCount = node.params.length;
+			
+			traverseWithParents(node, function(child)
+			{
+				if( isDecision(child) )
+				{
+					builder.SimpleCyclomaticComplexity++;
+
+					traverseWithParents(child, function(child2) {
+						if( child2.type == 'Logical Expression' )
+							builder.MaxConditions++;
+					});
+				}
+			});
+
+			builder.SimpleCyclomaticComplexity++;
+
+
+			builders[builder.FunctionName] = builder;
+		}
+
 		if( node.type == 'Literal' && typeof(node.value == 'string' ) )
 			fileBuilder.Strings++;
 
