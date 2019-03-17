@@ -38,6 +38,8 @@ function FunctionBuilder()
 	this.SimpleCyclomaticComplexity = 0;
 	// The max number of conditions if one decision statement.
 	this.MaxConditions      = 0;
+	// Whether the method is longer than 80 lines of code.
+	this.LongMethod = false;
 
 	this.report = function()
 	{
@@ -47,11 +49,12 @@ function FunctionBuilder()
 		   	"============\n" +
 			   "SimpleCyclomaticComplexity: {2}\t" +
 				"MaxConditions: {3}\t" +
-				"Parameters: {4}\n\n"
+				"LongMethod: {4}\t" +
+				"Parameters: {5}\n\n"
 			)
 			.format(this.FunctionName, this.StartLine,
 				     this.SimpleCyclomaticComplexity,
-			        this.MaxConditions, this.ParameterCount)
+			        this.MaxConditions, this.LongMethod, this.ParameterCount)
 		);
 	}
 };
@@ -120,6 +123,14 @@ function complexity(filePath)
 			builder.FunctionName = functionName(node);
 			builder.StartLine    = node.loc.start.line;
 			builder.ParameterCount = node.params.length;
+
+			builder.EndLine = node.loc.end.line;
+
+			if (builder.EndLine - builder.StartLine > 50)
+			{
+				builder.LongMethod = true;
+			}
+			
 			
 			traverseWithParents(node, function(child)
 			{
@@ -153,6 +164,12 @@ function complexity(filePath)
 			builder.StartLine    = node.loc.start.line;
 			node = node.expression.right;
 			builder.ParameterCount = node.params.length;
+			builder.EndLine = node.loc.end.line;
+
+			if (builder.EndLine - builder.StartLine > 50)
+			{
+				builder.LongMethod = true;
+			}
 			
 			traverseWithParents(node, function(child)
 			{
