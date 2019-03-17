@@ -98,6 +98,7 @@ function traverseWithParents(object, visitor)
     }
 }
 
+
 function complexity(filePath)
 {
 	var buf = fs.readFileSync(filePath, "utf8");
