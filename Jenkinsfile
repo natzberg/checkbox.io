@@ -35,7 +35,7 @@ pipeline {
                         script: 'cd server-side/site && node analysis.js ./routes/admin.js',
                         returnStdout: true
                     ).trim()
-                    if(RESULTS.contains("LongMethod: true") {
+                    if(RESULTS.contains("LongMethod: true") ) {
                         echo "Hello from failed build" + RESULTS
                         currentBuild.result = 'FAILURE'
                     }
