@@ -20,22 +20,22 @@ pipeline {
 
         stage('Analysis') {
             steps {
-                sh 'cd server-side/site && node analysis.js ./routes/admin.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/create.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/csv.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/designer.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/live.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/study.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/studyModel.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/upload.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js marqdown.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/admin.js'
+                sh 'cd server-side/site && node analysis.js ./routes/create.js'
+                sh 'cd server-side/site && node analysis.js ./routes/csv.js'
+                sh 'cd server-side/site && node analysis.js ./routes/designer.js'
+                sh 'cd server-side/site && node analysis.js ./routes/live.js'
+                sh 'cd server-side/site && node analysis.js ./routes/study.js'
+                sh 'cd server-side/site && node analysis.js ./routes/studyModel.js'
+                sh 'cd server-side/site && node analysis.js ./routes/upload.js'
+                sh 'cd server-side/site && node analysis.js marqdown.js'
                 
                 script {
                     def RESULTS = sh(
-                        script: 'cat ~/analysis_results.txt',
+                        script: 'cd server-side/site && node analysis.js ./routes/admin.js',
                         returnStdout: true
                     ).trim()
-                    if(RESULTS.length > 0) {
+                    if(RESULTS.contains("LongMethod: true") {
                         echo "Hello from failed build" + RESULTS
                         currentBuild.result = 'FAILURE'
                     }
