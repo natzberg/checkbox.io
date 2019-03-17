@@ -36,7 +36,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.length > 0) {
-                        echo "Hello from failed build"
+                        echo "Hello from failed build" + RESULTS
                         currentBuild.result = 'FAILURE'
                     }
                 }
