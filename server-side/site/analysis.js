@@ -116,53 +116,23 @@ function complexity(filePath)
 	// Tranverse program with a function visitor.
 	traverseWithParents(ast, function (node) 
 	{
-		if (node.type === 'FunctionDeclaration') 
+		if (node.type === 'FunctionDeclaration' || (node.type === 'ExpressionStatement' && node.expression.right && node.expression.right.type === 'FunctionExpression') ) 
 		{
 			var builder = new FunctionBuilder();
 
-			builder.FunctionName = functionName(node);
 			builder.StartLine    = node.loc.start.line;
-			builder.ParameterCount = node.params.length;
-
-			builder.EndLine = node.loc.end.line;
-
-			if (builder.EndLine - builder.StartLine > 50)
-			{
-				builder.LongMethod = true;
-			}
 			
-			
-			traverseWithParents(node, function(child)
-			{
-				if( isDecision(child) )
-				{
-					builder.SimpleCyclomaticComplexity++;
-
-					traverseWithParents(child, function(child2) {
-						if( child2.type == 'LogicalExpression' )
-							builder.MaxConditions++;
-					});
+			if (node.type === 'FunctionDeclaration') {
+				builder.FunctionName = functionName(node);
+			} else {
+				if (node.expression.left.name != undefined) {
+					builder.FunctionName = node.expression.left.name;
+				} else if (node.expression.left.property != undefined) {
+					builder.FunctionName = node.expression.left.property.name;
 				}
-			});
-
-			builder.SimpleCyclomaticComplexity++;
-
-
-			builders[builder.FunctionName] = builder;
-		}
-
-		if (node.type === 'ExpressionStatement' && node.expression.right && node.expression.right.type === 'FunctionExpression' ) 
-		{
-			var builder = new FunctionBuilder();
-
-			if (node.expression.left.name != undefined) {
-				builder.FunctionName = node.expression.left.name;
-			} else if (node.expression.left.property != undefined) {
-				builder.FunctionName = node.expression.left.property.name;
+				node = node.expression.right;
 			}
 			
-			builder.StartLine    = node.loc.start.line;
-			node = node.expression.right;
 			builder.ParameterCount = node.params.length;
 			builder.EndLine = node.loc.end.line;
 
@@ -171,16 +141,27 @@ function complexity(filePath)
 				builder.LongMethod = true;
 			}
 			
+			
 			traverseWithParents(node, function(child)
 			{
 				if( isDecision(child) )
 				{
 					builder.SimpleCyclomaticComplexity++;
 
-					traverseWithParents(child, function(child2) {
-						if( child2.type == 'Logical Expression' )
-							builder.MaxConditions++;
-					});
+					if (child.type == 'IfStatement') {
+						var conditions = 1;
+						traverseWithParents(child, function(child2) {
+							if( child2.type == 'LogicalExpression' && (child2.parent.alternate && child2.parent.alternate.type != 'IfExpression' ))
+							{
+								console.log(child2.parent);
+								console.log("logical expression found");
+								conditions++;
+								console.log('# conditions so far = ' + conditions);
+							}
+						});
+						if (conditions > builder.MaxConditions)
+							builder.MaxConditions = conditions;
+					}
 				}
 			});
 
