@@ -26,7 +26,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
-                        echo "LongMethod true in admin.js!"
+                        echo "[ERROR]: LongMethod true in admin.js!"
                         currentBuild.result = 'FAILURE'
                     }
                 }
@@ -36,7 +36,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
-                        echo "LongMethod true in create.js!"
+                        echo "[ERROR]: LongMethod true in create.js!"
                         currentBuild.result = 'FAILURE'
                     }
                 }
@@ -47,7 +47,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
-                        echo "LongMethod true in csv.js!"
+                        echo "[ERROR]: LongMethod true in csv.js!"
                         currentBuild.result = 'FAILURE'
                     }
                 }
@@ -58,7 +58,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
-                        echo "LongMethod true in designer.js!"
+                        echo "[ERROR]: LongMethod true in designer.js!"
                         currentBuild.result = 'FAILURE'
                     }
                 }
@@ -69,7 +69,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
-                        echo "LongMethod true in live.js!"
+                        echo "[ERROR]: LongMethod true in live.js!"
                         currentBuild.result = 'FAILURE'
                     }
                 }
@@ -80,7 +80,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
-                        echo "LongMethod true in study.js!"
+                        echo "[ERROR]: LongMethod true in study.js!"
                         currentBuild.result = 'FAILURE'
                     }
                 }
@@ -91,7 +91,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
-                        echo "LongMethod true in studyModel.js!"
+                        echo "[ERROR]: LongMethod true in studyModel.js!"
                         currentBuild.result = 'FAILURE'
                     }
                 }
@@ -102,7 +102,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
-                        echo "LongMethod true in upload.js!"
+                        echo "[ERROR]: LongMethod true in upload.js!"
                         currentBuild.result = 'FAILURE'
                     }
                 }
@@ -113,7 +113,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
                     if(RESULTS.contains("LongMethod: true") ) {
-                        echo "LongMethod true in marqdown.js!"
+                        echo "[ERROR]: LongMethod true in marqdown.js!"
                         currentBuild.result = 'FAILURE'
                     }
                 }
