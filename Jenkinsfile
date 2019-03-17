@@ -20,15 +20,103 @@ pipeline {
 
         stage('Analysis') {
             steps {
-                sh 'cd server-side/site && node analysis.js ./routes/admin.js'
-                sh 'cd server-side/site && node analysis.js ./routes/create.js'
-                sh 'cd server-side/site && node analysis.js ./routes/csv.js'
-                sh 'cd server-side/site && node analysis.js ./routes/designer.js'
-                sh 'cd server-side/site && node analysis.js ./routes/live.js'
-                sh 'cd server-side/site && node analysis.js ./routes/study.js'
-                sh 'cd server-side/site && node analysis.js ./routes/studyModel.js'
-                sh 'cd server-side/site && node analysis.js ./routes/upload.js'
-                sh 'cd server-side/site && node analysis.js marqdown.js'
+                script {
+                    def RESULTS = sh(
+                        script: 'cd server-side/site && node analysis.js ./routes/admin.js',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.contains("LongMethod: true") ) {
+                        echo "[ERROR]: LongMethod true in admin.js!"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+                script {
+                    def RESULTS = sh(
+                        script: 'cd server-side/site && node analysis.js ./routes/create.js',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.contains("LongMethod: true") ) {
+                        echo "[ERROR]: LongMethod true in create.js!"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+                
+                script {
+                    def RESULTS = sh(
+                        script: 'cd server-side/site && node analysis.js ./routes/csv.js',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.contains("LongMethod: true") ) {
+                        echo "[ERROR]: LongMethod true in csv.js!"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+                
+                script {
+                    def RESULTS = sh(
+                        script: 'cd server-side/site && node analysis.js ./routes/designer.js',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.contains("LongMethod: true") ) {
+                        echo "[ERROR]: LongMethod true in designer.js!"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+                
+                script {
+                    def RESULTS = sh(
+                        script: 'cd server-side/site && node analysis.js ./routes/live.js',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.contains("LongMethod: true") ) {
+                        echo "[ERROR]: LongMethod true in live.js!"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+                
+                script {
+                    def RESULTS = sh(
+                        script: 'cd server-side/site && node analysis.js ./routes/study.js',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.contains("LongMethod: true") ) {
+                        echo "[ERROR]: LongMethod true in study.js!"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+                
+                script {
+                    def RESULTS = sh(
+                        script: 'cd server-side/site && node analysis.js ./routes/studyModel.js',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.contains("LongMethod: true") ) {
+                        echo "[ERROR]: LongMethod true in studyModel.js!"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+                
+                script {
+                    def RESULTS = sh(
+                        script: 'cd server-side/site && node analysis.js ./routes/upload.js',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.contains("LongMethod: true") ) {
+                        echo "[ERROR]: LongMethod true in upload.js!"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+                
+                script {
+                    def RESULTS = sh(
+                        script: 'cd server-side/site && node analysis.js marqdown.js',
+                        returnStdout: true
+                    ).trim()
+                    if(RESULTS.contains("LongMethod: true") ) {
+                        echo "[ERROR]: LongMethod true in marqdown.js!"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
             }
         }
     }
