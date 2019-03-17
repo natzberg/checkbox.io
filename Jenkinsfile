@@ -20,15 +20,15 @@ pipeline {
 
         stage('Analysis') {
             steps {
-                sh 'cd server-side/site && node analysis.js ./routes/admin.js | grep --line-buffered "LongMethod: true" > ~/analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/create.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/csv.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/designer.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/live.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/study.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/studyModel.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js ./routes/upload.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
-                sh 'cd server-side/site && node analysis.js marqdown.js | grep --line-buffered "LongMethod: true" >> ~/analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/admin.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/create.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/csv.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/designer.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/live.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/study.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/studyModel.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js ./routes/upload.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
+                sh 'cd server-side/site && node analysis.js marqdown.js | grep --line-buffered "LongMethod: true" >> analysis_results.txt'
                 
                 script {
                     def RESULTS = sh(
